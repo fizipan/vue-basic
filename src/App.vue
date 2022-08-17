@@ -1,14 +1,45 @@
 <template>
-  <h2>{{ name }}</h2>
   <div>
-    <button @click="changeName($event), increment(2, $event)">Chnage Name</button>
+    <pre>
+    {{ JSON.stringify(formInput, null, 2) }}
+  </pre
+    >
   </div>
-  <hr />
-  <h2>Count: {{ count }}</h2>
-  <div>
-    <button @click="increment(2, $event)">Increment 2</button>
-    <button @click="decrement(2, $event)">Decrement 2</button>
-  </div>
+  <form>
+    <div>
+      <label for="name">Name</label>
+      <input id="name" v-model.trim="formInput.name" type="text" autocomplete="off" />
+    </div>
+
+    <div>
+      <label for="profile">Profile</label>
+      <textarea id="profile" v-model.trim="formInput.profile" autocomplete="off"></textarea>
+    </div>
+
+    <div>
+      <label for="country">Country</label>
+      <select name="country" id="country" v-model="formInput.country">
+        <option value="">Select Country</option>
+        <option>Japan</option>
+        <option>United States</option>
+        <option>United Kingdom</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="jobLocation">Job Location</label>
+      <select name="jobLocation" id="jobLocation" multiple v-model="formInput.jobLocation">
+        <option>Japan</option>
+        <option>United States</option>
+        <option>United Kingdom</option>
+      </select>
+    </div>
+
+    <div>
+      <input type="checkbox" name="remoteWork" id="remoteWork" v-model="formInput.remoteWork" />
+      <label for="remoteWork">Remote Work</label>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -16,29 +47,45 @@ export default {
   name: "App",
   data() {
     return {
-      name: "Vue",
-      count: 0,
+      formInput: {
+        name: "",
+        profile: "",
+        country: "",
+        jobLocation: [],
+        remoteWork: false,
+        skillSet: [],
+      },
     }
   },
-  methods: {
-    changeName(e) {
-      this.name = "Hafizh"
-      console.log(e)
-    },
-    increment(num, event) {
-      this.count += num
-      console.log(event)
-    },
-    decrement(num, event) {
-      if (this.count > 0) {
-        this.count -= num
-        console.log(event)
-      } else {
-        alert("Count cannot be less than 0")
-      }
-    },
-  },
+  methods: {},
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+label {
+  font-weight: bold;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+}
+
+input + label {
+  font-weight: bold;
+  display: inline-flex;
+  margin-right: 20px;
+}
+</style>
