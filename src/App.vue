@@ -3,6 +3,8 @@
   <div v-text="channel"></div>
   <div v-html="channelHtml"></div>
   <div v-html="hack"></div>
+  <h2 :id="headingId">Heading</h2>
+  <button :disabled="isDisabled">Disabled</button>
 </template>
 
 <script>
@@ -15,6 +17,8 @@ export default {
       channel: "Web Programming 17",
       channelHtml: "<b>Web Programming 17</b>",
       hack: `<a href="#" onclick="alert('You have been hacked')">Win a Prize</a>`,
+      headingId: "heading-id",
+      isDisabled: true,
     }
   },
 }
