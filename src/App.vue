@@ -1,8 +1,14 @@
 <template>
-  <h2>{{ 2 + 3 + 5 }}</h2>
-  <h2>{{ 5 + 10 + 15 }}</h2>
-  <h2>Add Method - {{ add(2, 3, 10) }}</h2>
-  <h2>Add multiply - {{ multiply(20) }}</h2>
+  <h2>{{ name }}</h2>
+  <div>
+    <button @click="changeName($event), increment(2, $event)">Chnage Name</button>
+  </div>
+  <hr />
+  <h2>Count: {{ count }}</h2>
+  <div>
+    <button @click="increment(2, $event)">Increment 2</button>
+    <button @click="decrement(2, $event)">Decrement 2</button>
+  </div>
 </template>
 
 <script>
@@ -10,15 +16,26 @@ export default {
   name: "App",
   data() {
     return {
-      baseMultiplier: 2,
+      name: "Vue",
+      count: 0,
     }
   },
   methods: {
-    add(a, b, c) {
-      return a + b + c
+    changeName(e) {
+      this.name = "Hafizh"
+      console.log(e)
     },
-    multiply(num) {
-      return num * this.baseMultiplier
+    increment(num, event) {
+      this.count += num
+      console.log(event)
+    },
+    decrement(num, event) {
+      if (this.count > 0) {
+        this.count -= num
+        console.log(event)
+      } else {
+        alert("Count cannot be less than 0")
+      }
     },
   },
 }
