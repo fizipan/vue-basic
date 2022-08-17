@@ -12,6 +12,10 @@
   <h2 :class="{ promoted: isPromoted, new: !isSoldOut, 'sold-out': isSoldOut }">
     Object Conditional Movie
   </h2>
+
+  <h2 :style="{ color: highlighColor, fontSize: headerSize + 'px' }">Highlighted Text</h2>
+  <h2 :style="[baseStyle, successStyle]">Array Highlighted Text</h2>
+  <h2 :style="[baseStyle, dangerStyle]">Array Highlighted Text</h2>
 </template>
 
 <script>
@@ -24,6 +28,17 @@ export default {
       status: "danger",
       isPromoted: false,
       isSoldOut: true,
+      highlighColor: "orange",
+      headerSize: "50",
+      baseStyle: {
+        fontSize: "20px",
+      },
+      successStyle: {
+        backgroundColor: "green",
+      },
+      dangerStyle: {
+        backgroundColor: "red",
+      },
     }
   },
 }
