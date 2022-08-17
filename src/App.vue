@@ -1,12 +1,9 @@
 <template>
   <template v-for="name in names" :key="name">
-    <h2>
+    <h2 v-if="name === 'John'">
       {{ name }}
     </h2>
-    <input type="text" placeholder="Las Name" />
-    <hr />
   </template>
-  <button @click="shuffle">Shuffle</button>
 </template>
 
 <script>
