@@ -1,5 +1,6 @@
 <template>
-  <h1>{{ message }}</h1>
+  <div>{{ greet }} {{ name }}</div>
+  <div v-text="channel"></div>
 </template>
 
 <script>
@@ -7,7 +8,9 @@ export default {
   name: "App",
   data() {
     return {
-      message: "Hello Vue!",
+      greet: "Hello",
+      name: "Hafizh Maulana",
+      channel: "Web Programming 17",
     }
   },
 }
