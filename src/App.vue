@@ -1,23 +1,24 @@
 <template>
-  <template v-for="name in names" :key="name">
-    <h2 v-if="name === 'John'">
-      {{ name }}
-    </h2>
-  </template>
+  <h2>{{ 2 + 3 + 5 }}</h2>
+  <h2>{{ 5 + 10 + 15 }}</h2>
+  <h2>Add Method - {{ add(2, 3, 10) }}</h2>
+  <h2>Add multiply - {{ multiply(20) }}</h2>
 </template>
 
 <script>
-import _ from "lodash"
 export default {
   name: "App",
   data() {
     return {
-      names: ["John", "Jane", "Joe"],
+      baseMultiplier: 2,
     }
   },
   methods: {
-    shuffle() {
-      this.names = _.shuffle(this.names)
+    add(a, b, c) {
+      return a + b + c
+    },
+    multiply(num) {
+      return num * this.baseMultiplier
     },
   },
 }
