@@ -1,45 +1,10 @@
 <template>
-  <div>
-    <pre>
-    {{ JSON.stringify(formInput, null, 2) }}
-  </pre
-    >
-  </div>
-  <form>
-    <div>
-      <label for="name">Name</label>
-      <input id="name" v-model.trim="formInput.name" type="text" autocomplete="off" />
-    </div>
-
-    <div>
-      <label for="profile">Profile</label>
-      <textarea id="profile" v-model.trim="formInput.profile" autocomplete="off"></textarea>
-    </div>
-
-    <div>
-      <label for="country">Country</label>
-      <select name="country" id="country" v-model="formInput.country">
-        <option value="">Select Country</option>
-        <option>Japan</option>
-        <option>United States</option>
-        <option>United Kingdom</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="jobLocation">Job Location</label>
-      <select name="jobLocation" id="jobLocation" multiple v-model="formInput.jobLocation">
-        <option>Japan</option>
-        <option>United States</option>
-        <option>United Kingdom</option>
-      </select>
-    </div>
-
-    <div>
-      <input type="checkbox" name="remoteWork" id="remoteWork" v-model="formInput.remoteWork" />
-      <label for="remoteWork">Remote Work</label>
-    </div>
-  </form>
+  <h2>Fullname - {{ firstName }} {{ lastName }}</h2>
+  <button @click="changeName">Change Name</button>
+  <h2>Computed Fullname - {{ fullName }}</h2>
+  <h2>Total - {{ items.reduce((total, item) => total + item.price, 0) }}</h2>
+  <h2>Computed Total - {{ total }}</h2>
+  <button @click="items.push({ id: 4, name: 'New Item', price: 10 })">Add Item</button>
 </template>
 
 <script>
@@ -47,45 +12,36 @@ export default {
   name: "App",
   data() {
     return {
-      formInput: {
-        name: "",
-        profile: "",
-        country: "",
-        jobLocation: [],
-        remoteWork: false,
-        skillSet: [],
-      },
+      firstName: "Hafizh",
+      lastName: "Maulana",
+      items: [
+        { id: 1, title: "TV", price: 100 },
+        { id: 2, title: "Laptop", price: 200 },
+        { id: 3, title: "Kulkas", price: 50 },
+      ],
     }
   },
-  methods: {},
+  methods: {
+    changeName() {
+      this.fullName = "Syatya Athary"
+    },
+  },
+  computed: {
+    fullName: {
+      get() {
+        return this.firstName + " " + this.lastName
+      },
+      set(newValue) {
+        const names = newValue.split(" ")
+        this.firstName = names[0]
+        this.lastName = names[1]
+      },
+    },
+    total() {
+      return this.items.reduce((total, item) => total + item.price, 0)
+    },
+  },
 }
 </script>
 
-<style scoped>
-label {
-  font-weight: bold;
-  display: flex;
-  margin-bottom: 5px;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 5px;
-  margin-bottom: 5px;
-}
-
-input[type="checkbox"] {
-  width: auto;
-  margin-right: 10px;
-}
-
-input + label {
-  font-weight: bold;
-  display: inline-flex;
-  margin-right: 20px;
-}
-</style>
+<style scoped></style>
