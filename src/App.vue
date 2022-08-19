@@ -1,10 +1,13 @@
 <template>
-  <h2>Fullname - {{ firstName }} {{ lastName }}</h2>
-  <button @click="changeName">Change Name</button>
-  <h2>Computed Fullname - {{ fullName }}</h2>
-  <h2>Total - {{ items.reduce((total, item) => total + item.price, 0) }}</h2>
-  <h2>Computed Total - {{ total }}</h2>
-  <button @click="items.push({ id: 4, name: 'New Item', price: 10 })">Add Item</button>
+  <h2>Volume Tracker (0-20)</h2>
+  <h2>Current Volume {{ volume }}</h2>
+  <div>
+    <button @click="volume += 2">Increase</button>
+    <button @click="volume -= 2">Decrease</button>
+  </div>
+  <input type="text" v-model="movie" />
+  <input type="text" v-model="movieInfo.title" />
+  <input type="text" v-model="movieInfo.actor" />
 </template>
 
 <script>
@@ -12,33 +15,31 @@ export default {
   name: "App",
   data() {
     return {
-      firstName: "Hafizh",
-      lastName: "Maulana",
-      items: [
-        { id: 1, title: "TV", price: 100 },
-        { id: 2, title: "Laptop", price: 200 },
-        { id: 3, title: "Kulkas", price: 50 },
-      ],
+      volume: 0,
+      movie: "hafizh",
+      movieInfo: {
+        title: "",
+        actor: "",
+      },
     }
   },
-  methods: {
-    changeName() {
-      this.fullName = "Syatya Athary"
+  watch: {
+    volume(newVolume, oldValue) {
+      if (newVolume > oldValue && newVolume === 16) {
+        alert("Volume at max!")
+      }
     },
-  },
-  computed: {
-    fullName: {
-      get() {
-        return this.firstName + " " + this.lastName
+    movie: {
+      handler(newValue) {
+        console.log("calling api =", newValue)
       },
-      set(newValue) {
-        const names = newValue.split(" ")
-        this.firstName = names[0]
-        this.lastName = names[1]
-      },
+      immediate: true,
     },
-    total() {
-      return this.items.reduce((total, item) => total + item.price, 0)
+    movieInfo: {
+      handler(newValue) {
+        console.log("calling api =", newValue)
+      },
+      deep: true,
     },
   },
 }
